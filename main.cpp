@@ -3,6 +3,7 @@
 #include <set>
 #include <list>
 #include <vector>
+#include <algorithm>
 #include <fstream>
 using namespace std;
 using namespace std::chrono;
@@ -51,14 +52,21 @@ int main() {
     auto duration_set = duration_cast<milliseconds>(end_set - start_set);
     auto duration_list = duration_cast<milliseconds>(end_list - start_list);
     
-    cout << "vector: " << duration_vector.count() << ", set: " << duration_set.count() << ", list: " << duration_list.count();
+    cout << "Reading race (ms): " << endl;
+    cout << "Vector: " << duration_vector.count() << ", Set: " << duration_set.count() << ", List: " << duration_list.count();
     
     infile.close();
 
     // Sort race
-    
-
-
+    // Vector
+    start_vector = high_resolution_clock::now();
+    sort(codes_vector.begin(), codes_vector.end()); // No vector sort member function - use algorithms library
+    end_vector = high_resolution_clock::now();
+    // Set = -1
+    // List
+    start_list = high_resolution_clock::now();
+    codes_list.sort();
+    end_list = high_resolution_clock::now();
     return 0;
 }
 
